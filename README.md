@@ -40,7 +40,48 @@ $$
 | Surface net solar radiation clear sky          | \$R\_{sk}\$      | Net surface solar radiation under clear sky                                                                           |
 | Surface pressure                               | \$P\$            | Surface pressure                                                                                                      | 
 
+我尝试了多种模型的结果，目前的预测模式是前七天迭代预测第八天的降雨情况，使用的是TS评分，分别使用了单特征、前五个特征和前八个特征。这本质上是两个分类问题。所以使用的模型均为分类模型。
+
+特大暴雨结果如下：
+| Machine Learning | Number of features |               |
+|------------------|--------------------|---------------|
+|                  | Five characteristics | Eight characteristics |
+| Logistic | 0.02 | 0.02 |
+| SVC | 0 | 0 |
+| BLS | 0 | 0 |
+| DT | **0.08** | **0.07** |
+| RF | 0.04 | 0.06 |
+| GBDT | 0.04 | 0.04 |
+| XGBoost | 0.03 | 0.03 |
+| Etr | 0 | 0 |
+| Lgb | 0.04 | 0.04 |
+
+晴雨预报结果如下:
+| Machine Learning      | Number of features |       |       | Deep Learning/VMD-ML  |     |
+|-----------------------|:------------------:|:-----:|:-----:|:----------------------:|:---:|
+|                       | One                | Five  | Eight |                        | One |
+| Logistic              | 0.671              | 0.703 | 0.694 | RNN                    | 0.651 |
+| SVC                   | 0.672              | 0.693 | 0.699 | LSTM                   | **0.668** |
+| BLS                   | 0.667              | 0.672 | 0.669 | GRU                    | 0.664 |
+| DT                    | 0.624              | 0.672 | 0.682 | LSTNet                 | 0.653 |
+| RF                    | 0.702              | 0.714 | 0.711 |                        |      |
+| GBDT                  | **0.719**          | **0.731** | **0.729** | VMD-GBDT  | 0.718 |
+| XGBoost               | 0.709              | 0.722 | 0.714 |                        |      |
+| Etr                   | 0.710              | 0.717 | 0.712 |
+| Lgb                   | 0.714              | 0.722 | 0.724 |                        |      |
+
+但站点调参的结果如下：
+|                                          | *Machine Learning* |      **The target variable**       |
+| :--------------------------------------: | :----------------: | :--------------------------------: |
+|                 **Five**                 |        GBDT        |      0.77($Iterative$)      |         $None$         |
+|                                          |         DT         |          $None$           |           0.141            |
+|                **Eight**                 |        GBDT        |      0.75($Iterative$)      |         $None$         |
+|                                          |         DT         |          $None$           |          0.129           |
 
 
 
-晴雨预报与暴雨短时预报的[报告](Rainfall_Report20230427.pdf)
+
+
+
+
+具体了解请阅读晴雨预报与暴雨短时预报的[报告]。(Rainfall_Report20230427.pdf)
