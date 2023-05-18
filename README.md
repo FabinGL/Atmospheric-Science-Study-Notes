@@ -18,27 +18,7 @@ $$
 \right.
 $$
 
-在第一阶段的工作中，使用的是ERA5的数据集，已经完成了初步的数据清洗和模型调整，最后所使用的数据如下表所示：
-| **Feature**                                   | **Variable Name** | **Introduction**                                                                                                     |
-| --------------------------------------------- | ----------------- | -------------------------------------------------------------------------------------------------------------------- |
-| <font color="#FE0000">Total Precipitation</font>     | <font color="#FE0000">\$T\_p\$</font>   | <font color="#FE0000">Total precipitation in the 24 hours</font>                                                        |
-| <font color="#3166FF">Convective Precipitation</font> | <font color="#3166FF">\$C\_p\$</font>   | <font color="#3166FF">Precipitation from convective clouds</font>                                                    |
-| <font color="#3166FF">10m v Component of Wind</font>  | <font color="#3166FF">\$W\_{cv}\$</font> | <font color="#3166FF">10m v component of wind</font>                                                                 |
-| <font color="#3166FF">10m u Component of Wind</font>  | <font color="#3166FF">\$W\_{cu}\$</font> | <font color="#3166FF">10m u component of wind</font>                                                                 |
-| <font color="#3166FF">2m Temperature</font>           | <font color="#3166FF">\$T\_{2m}\$</font> | <font color="#3166FF">Temperature at 2m height</font>                                                               |
-| <font color="#3166FF">Temperature</font>              | <font color="#3166FF">\$T\$</font>      | <font color="#3166FF">Daily temperature</font>                                                                     |
-| <font color="#3166FF">Relative Humidity</font>        | <font color="#3166FF">\$H\_r\$</font>   | <font color="#3166FF">Relative humidity, the percentage of water vapor pressure to water saturated vapor pressure</font> |
-| <font color="#3166FF">Specific Humidity</font>        | <font color="#3166FF">\$H\_s\$</font>   | <font color="#3166FF">Specific humidity, the ratio of the mass of water vapor to the total mass of air in the parcel</font> |
-| Vorticity                                      | \$V\$            | Vorticity, used to describe the rotational state of the fluid                                                         |
-| Divergence                                     | \$D\$            | Divergence, the horizontal divergence of velocity                                                                      |
-| Geopotential                                   | \$G\$            | Geopotential, refers to the undulating and scaling of the surface in horizontal and vertical planes                    |
-| Large scale precipitaiton                      | \$P\_s\$         | Large-scale precipitation                                                                                             |
-| Mean top net long wave radiation flux          | \$F\_r\$         | Mean top net longwave radiation flux                                                                                   |
-| Potential vorticity                            | \$P\_v\$         | Potential vorticity                                                                                                   |
-| Surface latent heat flux                       | \$F\_h\$         | Surface latent heat flux                                                                                              |
-| Surface net solar radiation                    | \$R\_s\$         | Net surface solar radiation                                                                                           |
-| Surface net solar radiation clear sky          | \$R\_{sk}\$      | Net surface solar radiation under clear sky                                                                           |
-| Surface pressure                               | \$P\$            | Surface pressure                                                                                                      | 
+在第一阶段的工作中，使用的是ERA5的数据集，已经完成了初步的数据清洗和模型调整。
 
 我尝试了多种模型的结果，目前的预测模式是前七天迭代预测第八天的降雨情况，使用的是TS评分，分别使用了单特征、前五个特征和前八个特征。这本质上是两个分类问题。所以使用的模型均为分类模型。
 
@@ -85,3 +65,34 @@ $$
 
 
 ***具体了解请阅读晴雨预报与暴雨短时预报的[报告](Rainfall_Report20230427.pdf)。***
+
+--- 
+
+## 月季度的降水预报
+
+第二部分的工作我将会负责月季度降水量的工作，使用的仍然是ERA5的福建地区的数据，数据精度为0.25 $km$ \* 0.25 $km$ 。目的是预测次月的月降水总量，是一个回归的问题。最后清洗的表格为19\*20=380条序列，就是每个月一个格点会有一条序列，那么每个月就会有380条序列数据。
+
+### 数据集整合
+
+在第一部分的工作中，由于数据清洗量庞大，所以我没有用到数据集中所有的特征。我暂时使用的特征数量如下所示：
+| **Feature**                                   | **Variable Name** | **Introduction**                                                                                                     |
+| --------------------------------------------- | ----------------- | -------------------------------------------------------------------------------------------------------------------- |
+| <font color="#FE0000">Total Precipitation</font>     | <font color="#FE0000">\$T\_p\$</font>   | <font color="#FE0000">Total precipitation in the 24 hours</font>                                                        |
+| <font color="#3166FF">Convective Precipitation</font> | <font color="#3166FF">\$C\_p\$</font>   | <font color="#3166FF">Precipitation from convective clouds</font>                                                    |
+| <font color="#3166FF">10m v Component of Wind</font>  | <font color="#3166FF">\$W\_{cv}\$</font> | <font color="#3166FF">10m v component of wind</font>                                                                 |
+| <font color="#3166FF">10m u Component of Wind</font>  | <font color="#3166FF">\$W\_{cu}\$</font> | <font color="#3166FF">10m u component of wind</font>                                                                 |
+| <font color="#3166FF">2m Temperature</font>           | <font color="#3166FF">\$T\_{2m}\$</font> | <font color="#3166FF">Temperature at 2m height</font>                                                               |
+| <font color="#3166FF">Temperature</font>              | <font color="#3166FF">\$T\$</font>      | <font color="#3166FF">Daily temperature</font>                                                                     |
+| <font color="#3166FF">Relative Humidity</font>        | <font color="#3166FF">\$H\_r\$</font>   | <font color="#3166FF">Relative humidity, the percentage of water vapor pressure to water saturated vapor pressure</font> |
+| <font color="#3166FF">Specific Humidity</font>        | <font color="#3166FF">\$H\_s\$</font>   | <font color="#3166FF">Specific humidity, the ratio of the mass of water vapor to the total mass of air in the parcel</font> |
+| Vorticity                                      | \$V\$            | Vorticity, used to describe the rotational state of the fluid                                                         |
+| Divergence                                     | \$D\$            | Divergence, the horizontal divergence of velocity                                                                      |
+| Geopotential                                   | \$G\$            | Geopotential, refers to the undulating and scaling of the surface in horizontal and vertical planes                    |
+| Large scale precipitaiton                      | \$P\_s\$         | Large-scale precipitation                                                                                             |
+| Mean top net long wave radiation flux          | \$F\_r\$         | Mean top net longwave radiation flux                                                                                   |
+| Potential vorticity                            | \$P\_v\$         | Potential vorticity                                                                                                   |
+| Surface latent heat flux                       | \$F\_h\$         | Surface latent heat flux                                                                                              |
+| Surface net solar radiation                    | \$R\_s\$         | Net surface solar radiation                                                                                           |
+| Surface net solar radiation clear sky          | \$R\_{sk}\$      | Net surface solar radiation under clear sky                                                                           |
+| Surface pressure                               | \$P\$            | Surface pressure                                                                                                      | 
+
