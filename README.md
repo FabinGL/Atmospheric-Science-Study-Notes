@@ -179,13 +179,30 @@ MLP是一种使用反向传播算法来训练的人工神经网络，它可以�
 
 MAE、R2、MSE 和 RMSE 四个指标的公式:
 
-- MAE(mean absolute error)：$MAE=\frac{1}{n}\sum_{i=1}^{n}|y_i-\hat{y_i}|$
+- MAE(mean absolute error)：
 
-- R2(score)：$R^2=1-\frac{\sum_{i=1}^{n}(y_i-\hat{y_i})^2}{\sum_{i=1}^{n}(y_i-\bar{y})^2}$
+$$
+MAE=\frac{1}{n}\sum_{i=1}^{n}|y_i-\hat{y_i}|
+$$
 
-- MSE(mean squared error)：$MSE=\frac{1}{n}\sum_{i=1}^{n}(y_i-\hat{y_i})^2$
+- R2(score)：
+ 
+$$
+R^2=1-\frac{\sum_{i=1}^{n}(y_i-\hat{y_i})^2}{\sum_{i=1}^{n}(y_i-\bar{y})^2}
+$$
 
-- RMSE(root mean squared error)：$RMSE=\sqrt{\frac{1}{n}\sum_{i=1}^{n}(y_i-\hat{y_i})^2}$
+- MSE(mean squared error)：
+
+$$
+MSE=\frac{1}{n}\sum_{i=1}^{n}(y_i-\hat{y_i})^2
+$$
+
+- RMSE(root mean squared error)：
+
+$$
+RMSE=\sqrt{\frac{1}{n}\sum_{i=1}^{n}(y_i-\hat{y_i})^2}
+$$
+
 
 其中，$y_i$ 是真实值，$\hat{y_i}$ 是预测值，$\bar{y}$ 是所有真实值的平均值，$n$ 是样本数。这四个指标常用于评价机器学习模型的预测效果，其中 MAE 和 RMSE 可以衡量预测值与真实值之间的距离、误差大小，而 R2 和 MSE 可以反映预测值与真实值之间的相关性、拟合优度。
 
