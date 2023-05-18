@@ -11,9 +11,9 @@
 $$
 \left\{
              \begin{array}{lr}
-             \mbox{$C$城市第$n$天将没有降雨;} & T_p \leq 0.1$mm$ \\
-             \mbox{$C$城市第$n$天将会有降雨;} & T_p > 0.1$mm$ \\
-             \mbox{$C$城市第$n$天将有大暴雨.} & T_p > 32$mm$  
+             \mbox{$C$城市第$n$天将没有降雨;} & T_p \leq 0.1 $mm$ \\
+             \mbox{$C$城市第$n$天将会有降雨;} & T_p > 0.1 $mm$ \\
+             \mbox{$C$城市第$n$天将有大暴雨.} & T_p > 32 $mm$  
              \end{array}
 \right.
 $$
