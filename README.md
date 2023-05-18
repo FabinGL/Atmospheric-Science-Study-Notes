@@ -74,7 +74,7 @@ $$
 
 ### 数据集整合
 
-在第一部分的工作中，由于数据清洗量庞大，所以我没有用到数据集中所有的特征。我暂时使用的特征数量如下所示：
+在第一部分的工作中，由于数据清洗量庞大，所以我没有用到数据集中所有的特征。但是在本次实验中，所需要使用的特征已经清洗完成。使用的特征数量如下所示：
 | **Feature**                                   | **Variable Name** | **Introduction**                                                                                                     |
 | --------------------------------------------- | ----------------- | -------------------------------------------------------------------------------------------------------------------- |
 | <font color="#FE0000">Total Precipitation</font>     | <font color="#FE0000">\$T\_p\$</font>   | <font color="#FE0000">Total precipitation in the 24 hours</font>                                                        |
@@ -95,4 +95,12 @@ $$
 | Surface net solar radiation                    | \$R\_s\$         | Net surface solar radiation                                                                                           |
 | Surface net solar radiation clear sky          | \$R\_{sk}\$      | Net surface solar radiation under clear sky                                                                           |
 | Surface pressure                               | \$P\$            | Surface pressure                                                                                                      | 
+
+这里的特征为与ERA5数据中的原始存在的特征。后面还要添加海洋活动数据和太阳黑子数据，同时也会添加一些别的地区的数据（**与福建遥相关的地区,后面会具体解释遥相关的概念**）。同时对于已经清洗的数据要做一个时间上的数据对齐。
+
+对于以上的数据我们做了一个每日降水量的数据修正，即：
+
+$$
+T_p < 0  \Rightarrow T_p = 0
+$$
 
