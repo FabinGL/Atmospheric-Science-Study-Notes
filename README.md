@@ -109,7 +109,6 @@ $$
 ![s_windows](image/S_windows.png)
 
 $$
-\label{Rc_mat}
 	A=\begin{bmatrix}
 	x_1^1(t)&X_1^2(t)&\cdots &X_1^7(t+7)  \\
 	X_2^1(t+1) &X_2^2(t+1) &\cdots  &X_2^7(t+8) \\
@@ -118,8 +117,9 @@ $$
 	 \end{bmatrix}
 $$
 
+
+
 $$
-label{y_mat}
 	B=\begin{bmatrix}
 	  y_{t+1}&y_{t+2}&\cdots &y_{t+n}  
 	 \end{bmatrix}
