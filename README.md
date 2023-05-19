@@ -301,7 +301,9 @@ $$
 
 ## Result
 
+我使用热力图分别表示以下三种相关性系数的结果
+
 ### 相关性分析
 
 ##### 皮尔逊系数
-
+![Pearson](image/Pearson_heatmap.pdf)
